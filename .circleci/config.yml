@@ -29,6 +29,18 @@ jobs:
       - run:
           name: "Say world"
           command: "echo World!!"
+  print_my_name:
+    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/configuration-reference/#executor-job
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Say my name"
+          command: "echo $MY_NAME"
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
@@ -39,3 +51,6 @@ workflows:
       - print_world:
           requires:
             - print_hello
+      - print_my_name:
+          requires:
+            - print_world
