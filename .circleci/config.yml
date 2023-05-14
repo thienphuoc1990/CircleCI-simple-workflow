@@ -8,6 +8,12 @@ commands:
       - run:
           name: "Say my name"
           command: "echo $MY_NAME"
+  on_failed:
+    steps:
+      - run:
+          name: on error
+          command: echo "Hello Error!"
+          when: on_fail
 
 
 # Define a job to be invoked later in a workflow.
@@ -57,6 +63,8 @@ jobs:
     steps:
       - checkout
       - echo_my_name
+      - run: exit 1
+      - on_failed
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
