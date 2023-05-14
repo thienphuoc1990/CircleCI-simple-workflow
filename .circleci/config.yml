@@ -2,6 +2,14 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+commands:
+  echo_my_name:
+    steps:
+      - run:
+          name: "Say my name"
+          command: "echo $MY_NAME"
+
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
@@ -48,9 +56,7 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
-      - run:
-          name: "Say my name"
-          command: "echo $MY_NAME"
+      - echo_my_name
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
